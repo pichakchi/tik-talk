@@ -1,0 +1,14 @@
+:host {
+	display: grid;
+	place-content: center;
+	color: var(--light-color);
+	border-bottom: var(--light-border);
+	padding: 16px 20px;
+}
+
+.companion-wrapper {
+	display: grid;
+	grid-template-columns: 32px 1fr;
+	grid-gap: 12px;
+	align-items: center;
+}

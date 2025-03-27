@@ -1,0 +1,13 @@
+<div class="messages-wrapper">
+	<ng-container *ngFor="let groupedMessage of getNewGroupedMessages(messages())">
+		<div class="dataChat__wrapper">
+			<div class="dataChat-container">{{ groupedMessage[0] }}</div>
+		</div>
+		<ng-container *ngFor="let message of groupedMessage[1]">
+			<app-chat-workspace-message
+				[message]="message"></app-chat-workspace-message>
+		</ng-container>
+	</ng-container>
+</div>
+
+<app-message-input (created)="onSendMessage($event)"></app-message-input>

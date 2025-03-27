@@ -1,0 +1,141 @@
+<form (ngSubmit)="onSubmit($event)" [formGroup]="form" class="experimental">
+	<h4 class="h4 mb16">Запись на консультацию</h4>
+
+	<label class="tt-control-label mb16">
+		Тип консультации
+		<select class="tt-input" formControlName="methodTypes">
+			<option [value]="MethodType.PSYCHOANALYSIS">Психоанализ</option>
+			<option [value]="MethodType.GESTALT">Гештальт-терапия</option>
+			<option [value]="MethodType.SUPERVISION">Супервизия</option>
+		</select>
+	</label>
+
+	<label class="tt-control-label mb16">
+		Имя
+		<input
+			formControlName="name"
+			class="tt-input"
+			type="text"
+			placeholder="Введите имя" />
+		<!--    <small class="validation">Заполни это поле!</small>-->
+	</label>
+
+	@if (form.controls.name.touched && form.controls.name.hasError('nameValid')) {
+	<small>{{ form.controls.name.getError('nameValid')?.message }}</small>
+	} @if (form.controls.name.touched &&
+	form.controls.name.hasError('startsWith')) {
+	<small>{{ form.controls.name.getError('startsWith')?.message }}</small>
+	} @if (form.controls.name.touched && form.controls.name.hasError('required'))
+	{
+	<small>Заполни это поле!</small>
+	}
+
+	<label class="tt-control-label mb16">
+		Фамилия
+		<input
+			formControlName="lastName"
+			class="tt-input"
+			type="text"
+			placeholder="Введите фамилию" />
+	</label>
+
+	@if (form.controls.methodTypes.value === MethodType.SUPERVISION){
+	<label class="tt-control-label mb16">
+		Специализация
+		<input
+			formControlName="specialization"
+			class="tt-input"
+			type="text"
+			placeholder="На чем вы специализируетесь?" />
+	</label>
+	}
+
+	<div class="two-columns" formGroupName="timeRange">
+		<label class="tt-control-label mb16">
+			Во сколько вы хотите начать сессию?
+			<input formControlName="from" class="tt-input" type="time" />
+		</label>
+
+		<label class="tt-control-label mb16">
+			До скольки вы хотите провести сессию?
+			<input formControlName="to" class="tt-input" type="time" />
+		</label>
+	</div>
+
+	@if (form.controls.timeRange.touched &&
+	form.controls.timeRange.hasError('timeRange')) {
+	<small>{{ form.controls.timeRange.getError('timeRange')?.message }}</small>
+	}
+
+	<div>
+		<h4 class="h6 mb16">Дополнительно</h4>
+
+		@for(group of form.controls.sessionTypes.controls; track group; let i =
+		$index) {
+		<div class="form-grid">
+			<div [formGroup]="group">
+				<div class="type-and-date">
+					<label class="tt-control-label mb16">
+						Тип проведения
+						<select class="tt-input" formControlName="counsellingTypes">
+							<option [value]="CounsellingType.PERSONALLY">Очно</option>
+							<option [value]="CounsellingType.ONLINE">Онлайн</option>
+							<option [value]="CounsellingType.HOME">На дому</option>
+						</select>
+					</label>
+
+					<label class="tt-control-label mb16">
+						Дата
+						<select class="tt-input" formControlName="dateTypes">
+							<option [value]="DateType.WORKDAY">Рабочий день</option>
+							<option [value]="DateType.WEEKEND">Выходной день</option>
+						</select>
+					</label>
+				</div>
+
+				<div [formGroup]="form.controls.feature">
+					<div class="type-and-date">
+						@for (control of form.controls.feature.controls | keyvalue: sort;
+						track control; let i = $index) {
+						<label>
+							{{ features[i].label }}
+							<input type="checkbox" [formControlName]="control.key" />
+						</label>
+						}
+					</div>
+				</div>
+
+				<!--          <div class="two-columns" formGroupName="timeRange">-->
+				<!--            <label class="tt-control-label mb16">-->
+				<!--              С-->
+				<!--              <input-->
+				<!--                formControlName="from"-->
+				<!--                class="tt-input"-->
+				<!--                type="time"-->
+				<!--              >-->
+				<!--            </label>-->
+
+				<!--            <label class="tt-control-label mb16">-->
+				<!--              До-->
+				<!--              <input-->
+				<!--                formControlName="to"-->
+				<!--                class="tt-input"-->
+				<!--                type="time"-->
+				<!--              >-->
+				<!--            </label>-->
+				<!--          </div>-->
+
+				<!--          @if (form.controls.timeRange.touched && form.controls.timeRange.hasError('timeRange')) {-->
+				<!--            <small>{{ form.controls.timeRange.getError('timeRange')?.message }}</small>-->
+				<!--          }-->
+			</div>
+			<div class="button_type-and-date mb16">
+				<button class="btn" (click)="addTypeSession()">Добавить</button>
+				<button class="btn" (click)="deleteTypeSession(i)">Удалить</button>
+			</div>
+		</div>
+		}
+	</div>
+
+	<button class="btn mt20">Подтвердить</button>
+</form>

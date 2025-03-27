@@ -1,0 +1,15 @@
+:host {
+	display: grid;
+	grid-gap: 16px;
+}
+
+.post-feed__wrapper {
+	display: grid;
+	grid-gap: 16px;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.post-feed__wrapper::-webkit-scrollbar {
+	display: none;
+}
