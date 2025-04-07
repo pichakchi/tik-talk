@@ -14,6 +14,7 @@ import { KeyValuePipe } from '@angular/common'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { Feature, MockService } from './mock.service'
 import { NameValidator } from './name.validator'
+import { StackInputComponent } from '@tt/common-ui'
 
 enum MethodType {
 	PSYCHOANALYSIS = 'PSYCHOANALYSIS',
@@ -88,7 +89,12 @@ function validateTimeRange({
 @Component({
 	selector: '[appExperimental]',
 	standalone: true,
-	imports: [FormsModule, ReactiveFormsModule, KeyValuePipe],
+	imports: [
+		FormsModule,
+		ReactiveFormsModule,
+		KeyValuePipe,
+		StackInputComponent
+	],
 	templateUrl: './experimental.html',
 	styleUrl: './experimental.scss'
 })
@@ -115,7 +121,8 @@ export class ExperimentalDirective {
 		timeRange: new FormGroup({
 			from: new FormControl<string>(''),
 			to: new FormControl<string>('')
-		})
+		}),
+		stack: new FormControl<string>('')
 	})
 
 	constructor() {

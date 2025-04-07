@@ -6,21 +6,21 @@ import {
 	inject,
 	Renderer2
 } from '@angular/core'
-import { fromEvent } from 'rxjs'
+import { debounceTime, fromEvent, pipe, Subject, takeUntil } from 'rxjs'
 import { ProfileCardComponent } from '../../ui'
 import { Store } from '@ngrx/store'
 import { profileActions, selectFilteredProfiles } from '../../data/store'
-import { ProfileFiltersComponent } from '..'
-import { InfiniteScrollTriggerComponent } from 'libs/common-ui/src/lib/components'
-import { AsyncPipe } from '@angular/common'
+import { ProfileFiltersComponent } from '@tt/profile'
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll'
+import { InfiniteScrollTriggerComponent } from '@tt/common-ui'
 
 @Component({
 	selector: 'app-search-page',
 	imports: [
 		ProfileCardComponent,
 		ProfileFiltersComponent,
-		InfiniteScrollTriggerComponent,
-		AsyncPipe
+		InfiniteScrollDirective,
+		InfiniteScrollTriggerComponent
 	],
 	templateUrl: './search-page.component.html',
 	standalone: true,
@@ -30,6 +30,7 @@ import { AsyncPipe } from '@angular/common'
 export class SearchPageComponent {
 	store = inject(Store)
 	profiles = this.store.selectSignal(selectFilteredProfiles)
+	destroy$ = new Subject<void>()
 
 	hostElement = inject(ElementRef)
 	r2 = inject(Renderer2)
@@ -40,6 +41,17 @@ export class SearchPageComponent {
 		this.store.dispatch(profileActions.setPage({}))
 	}
 
+	onScroll() {
+		this.timeToFetch()
+	}
+
+	// onIntersection(entries: IntersectionObserverEntry[]) {
+	// 	if (!entries.length) return
+	// 	if (entries[0].intersectionRatio > 0) {
+	// 		this.timeToFetch()
+	// 	}
+	// }
+
 	@HostListener('window:resize')
 	onWindowResize() {
 		this.resizeFeed()
@@ -48,9 +60,14 @@ export class SearchPageComponent {
 	ngAfterViewInit() {
 		this.resizeFeed()
 
-		fromEvent(window, 'resize').subscribe(() => {
-			console.log('Resize')
-		})
+		fromEvent(window, 'resize')
+			.pipe(debounceTime(500), takeUntil(this.destroy$))
+			.subscribe(() => {})
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next()
+		this.destroy$.complete()
 	}
 
 	resizeFeed() {

@@ -1,0 +1,5 @@
+.tt-del {
+	border: 2px solid red; /* Добавляет красную рамку */
+	position: relative; /* Убедитесь, что он находится в своем контексте */
+	z-index: 10;
+}

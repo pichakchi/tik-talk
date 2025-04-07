@@ -67,6 +67,12 @@
 	<small>{{ form.controls.timeRange.getError('timeRange')?.message }}</small>
 	}
 
+  <label class="tt-control-label mb16">
+    Опишите себя
+    <tt-stack-input formControlName="stack" class="tt-input"></tt-stack-input>
+  </label>
+
+
 	<div>
 		<h4 class="h6 mb16">Дополнительно</h4>
 
@@ -94,6 +100,7 @@
 				</div>
 
 				<div [formGroup]="form.controls.feature">
+          <h4 class="mb8">Ваше эмоциональное состояние</h4>
 					<div class="type-and-date">
 						@for (control of form.controls.feature.controls | keyvalue: sort;
 						track control; let i = $index) {

@@ -31,23 +31,23 @@ export class MockService {
 	getFeatures(): Observable<Feature[]> {
 		return of([
 			{
-				code: 'Сангвиник',
-				label: 'Открытый',
+				code: 'Cчастлив',
+				label: 'Очень счастлив',
 				value: true
 			},
 			{
-				code: 'Холерик',
-				label: 'Задумчивый',
+				code: 'Хорошо',
+				label: 'Доволен',
 				value: true
 			},
 			{
-				code: 'Флегматик',
-				label: 'Спокойный',
+				code: 'Стабильно',
+				label: 'Нормально',
 				value: false
 			},
 			{
-				code: 'Меланхолик',
-				label: 'Интровертированный',
+				code: 'Депрессивно',
+				label: 'Грустно',
 				value: false
 			}
 		])
