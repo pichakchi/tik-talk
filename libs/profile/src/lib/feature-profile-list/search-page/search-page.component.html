@@ -8,7 +8,7 @@
     @if (last) {
       @defer (on viewport) {
         <tt-infinite-scroll-trigger
-          (loaded)="timeToFetch()"
+          (loaded)="timeToFetchProfile()"
         ></tt-infinite-scroll-trigger>
       } @placeholder {
        <div></div>

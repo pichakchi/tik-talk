@@ -13,17 +13,12 @@ export class ProfileService {
 
 	baseApiUrl = 'https://icherniakov.ru/yt-course/'
 	me = signal<Profile | null>(null)
-	valueChanges: any
-
-	getTestAccounts() {
-		return this.http.get<Profile[]>(`${this.baseApiUrl}account/test_accounts`)
-	}
 
 	getMe() {
 		return this.http.get<Profile>(`${this.baseApiUrl}account/me`).pipe(
 			tap((res) => {
 				this.me.set(res)
-				this.#globalStoreService.me.set(res)
+				this.#globalStoreService.meProfile.set(res)
 			})
 		)
 	}

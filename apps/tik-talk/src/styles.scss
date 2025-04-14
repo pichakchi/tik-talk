@@ -165,12 +165,14 @@ body::-webkit-scrollbar {
 }
 
 .tt-form-input {
+	font-family: 'JetBrains Mono', sans-serif;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 21px;
 	border: none;
 	background: none;
+	background: var(--dark-color);
 	color: var(--light-color);
 	border-bottom: 1px solid var(--light-color);
 	height: 33px;

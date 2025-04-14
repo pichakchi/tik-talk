@@ -1,0 +1,12 @@
+.communities-search-form {
+	padding: 16px 20px;
+	background: var(--dark-color);
+	border: 1px solid var(--light-color);
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 40px;
+}
+
+.community-stack {
+	padding-top: 11px;
+}

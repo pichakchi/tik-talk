@@ -1,0 +1,18 @@
+:host {
+	display: grid;
+	grid-gap: 20px;
+	height: calc(100vh - 40px);
+	overflow: scroll hidden;
+	overflow-x: hidden;
+}
+
+.communities-card__wrapper {
+	display: grid;
+	grid-gap: 16px;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.communities-card__wrapper::-webkit-scrollbar {
+	display: none;
+}

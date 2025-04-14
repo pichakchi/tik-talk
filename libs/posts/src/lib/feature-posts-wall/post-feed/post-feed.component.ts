@@ -28,7 +28,7 @@ export class PostFeedComponent {
 	r2 = inject(Renderer2)
 	store = inject(Store)
 
-	profile = inject(GlobalStoreService).me
+	profile = inject(GlobalStoreService).meProfile
 	feed = this.store.selectSignal(selectCreatedPosts)
 
 	ngOnInit() {
