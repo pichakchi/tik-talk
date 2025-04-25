@@ -1,4 +1,5 @@
-<div class="stack-control">
+<ng-content></ng-content>
+<div class="stack-control tt-form-input">
   @for (tech of value$ | async; track tech; let i = $index) {
     <div class="skill-tag stack-tag">
       <button
@@ -12,9 +13,9 @@
     </div>
   }
 
-
   <input
+    [placeholder]="placeholder()"
     [(ngModel)]="innerInput"
-    type="text"
+    [type]="type()"
     class="stack-ghost-input">
 </div>

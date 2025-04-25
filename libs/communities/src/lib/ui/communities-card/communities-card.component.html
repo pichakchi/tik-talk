@@ -1,42 +1,38 @@
-@if (communities) {
+@if (community()) {
   <div class="communities-card">
     <div class="communities-avatar-name">
       <img
-        [src]="communities.avatarUrl | imgUrl"
-        [alt]="communities.name"
+        [src]="community().avatarUrl | imgUrl"
+        [alt]="community().name"
         class="communities-card__avatar" />
 
       <div class="communities-card__name">
-        <strong class="h6">{{ communities.name }}</strong>
-        <span class="subtitle">{{ communities.subscribersAmount }}</span>
+        <strong class="h6">{{ community().name }}</strong>
+        <span class="subtitle">{{ community().subscribersAmount }}</span>
       </div>
     </div>
 
     <div class="communities-card__tags">
-      @for (tag of communities.tags; track tag) {
-        <div class="communities-tag">{{ tag }}</div>
+      @for (tag of community().tags; track tag) {
+        <div class="skill-tag">{{ tag }}</div>
       }
     </div>
 
     <div class="communities-card__action-btns">
-      @if (community$ | async; as communities) {
-        @if (communities?.id && !isMyCommunity()) {
+        @if (community()?.id && !isMyCommunity()) {
           <button
             class="community-btn"
-            (click)="onSubscribe(communities.id)"
-            [ngClass]="{'active': isSubscribed}"
+            (click)="onSubscribe(community().id)"
+            [ngClass]="{'active': communityService.isSubscribed}"
           >
-            {{ buttonText }}
-            <!--        <img [src]="iconName" class="svg16" alt="subscribe-icon">-->
+            {{ communityService.buttonText }}
             <svg
               icon="subscribe"
               class="svg16"
             ></svg>
           </button>
         }
-      }
       <button class="community-svg-btn"><svg icon="go-to" class="svg16"></svg></button>
     </div>
   </div>
 }
-<!--[attr.icon]="iconName"-->

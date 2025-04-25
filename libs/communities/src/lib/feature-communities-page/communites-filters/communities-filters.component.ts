@@ -15,15 +15,12 @@ import {
 import { Store } from '@ngrx/store'
 import { debounceTime, startWith, Subscription } from 'rxjs'
 import { communitiesActions } from '../../data'
-import { StackInputComponent } from '@tt/common-ui'
-
-enum Themes {
-	PROGRAMMING = 'PROGRAMMING',
-	TECHNOLOGY = 'TECHNOLOGY',
-	EDUCATION = 'EDUCATION',
-	SPORT = 'SPORT',
-	OTHER = 'OTHER'
-}
+import {
+	StackInputComponent,
+	SvgIconComponent,
+	TtInputComponent
+} from '@tt/common-ui'
+import { SelectInputComponent } from '../../../../../common-ui/src/lib/components/select-input/select-input.component'
 
 @Component({
 	selector: 'app-communities-filters',
@@ -32,7 +29,10 @@ enum Themes {
 		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,
-		StackInputComponent
+		StackInputComponent,
+		SvgIconComponent,
+		TtInputComponent,
+		SelectInputComponent
 	],
 	templateUrl: './communities-filters.component.html',
 	styleUrl: './communities-filters.component.scss',
@@ -42,11 +42,9 @@ export class CommunitiesFiltersPageComponent implements OnDestroy {
 	fb = inject(FormBuilder)
 	store = inject(Store)
 
-	Themes = Themes
-
 	searchForm = this.fb.group({
 		name: [''],
-		themes: new FormControl<Themes>(Themes.PROGRAMMING),
+		themes: [''],
 		tags: ['']
 	})
 
@@ -57,7 +55,7 @@ export class CommunitiesFiltersPageComponent implements OnDestroy {
 			.pipe(startWith({}), debounceTime(500))
 			.subscribe((formValue) => {
 				this.store.dispatch(
-					communitiesActions.filterEvents({ filters: formValue })
+					communitiesActions.filterCommunities({ filters: formValue })
 				)
 			})
 	}

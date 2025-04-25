@@ -1,0 +1,14 @@
+<ng-content></ng-content>
+<div class="tt-form-input">
+  <input
+    [placeholder]="placeholder()"
+    class="select-ghost-input"
+    (focus)="toggleOptions()"
+    (blur)="hideOptions()"
+    [value]="selectedOption"
+  />
+  <div class="options" *ngIf="showOptions">
+    <div class="option" *ngFor="let option of options" (click)="selectOption(option, $event)">{{ option }}</div>
+  </div>
+</div>
+

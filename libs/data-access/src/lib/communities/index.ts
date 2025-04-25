@@ -1,5 +1,5 @@
-import { Communities } from './interfaces/communities.interface'
+import { Community } from './interfaces/communities.interface'
 import { CommunitiesService } from './services/communities.service'
 
-export type { Communities }
+export type { Community }
 export { CommunitiesService }

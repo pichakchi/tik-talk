@@ -59,8 +59,8 @@ export class TtInputComponent implements ControlValueAccessor {
 		console.log(isDisabled)
 	}
 
-	onModelChange(value: string | null): void {
-		this.onChange(value)
+	onModelChange(val: string | null): void {
+		this.onChange(val)
 		this.cdr.detectChanges()
 	}
 }

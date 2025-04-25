@@ -1,12 +1,18 @@
-import { Component, forwardRef, HostBinding, HostListener } from '@angular/core'
+import {
+	Component,
+	forwardRef,
+	HostBinding,
+	HostListener,
+	input
+} from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
 	ControlValueAccessor,
 	FormsModule,
 	NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 import { BehaviorSubject } from 'rxjs'
+import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 
 @Component({
 	selector: 'tt-stack-input',
@@ -14,7 +20,6 @@ import { BehaviorSubject } from 'rxjs'
 	imports: [CommonModule, SvgIconComponent, FormsModule],
 	templateUrl: './stack-input.component.html',
 	styleUrl: './stack-input.component.scss',
-
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -25,6 +30,8 @@ import { BehaviorSubject } from 'rxjs'
 })
 export class StackInputComponent implements ControlValueAccessor {
 	value$ = new BehaviorSubject<string[]>([])
+	placeholder = input<string>()
+	type = input<'text' | 'password'>('text')
 
 	#disabled = false
 
@@ -39,8 +46,17 @@ export class StackInputComponent implements ControlValueAccessor {
 	onEnter(event: KeyboardEvent) {
 		event.stopPropagation()
 		event.preventDefault()
+
 		if (!this.innerInput) return
-		this.value$.next([...this.value$.value, this.innerInput])
+
+		const currentValues = this.value$.value
+
+		if (currentValues.includes(this.innerInput)) {
+			this.innerInput = ''
+			return
+		}
+
+		this.value$.next([...currentValues, this.innerInput])
 		this.innerInput = ''
 		this.onChange(this.value$.value)
 	}
@@ -71,7 +87,7 @@ export class StackInputComponent implements ControlValueAccessor {
 	onTouched() {}
 
 	onTagDelete(i: number) {
-		const tags = this.value$.value
+		const tags = [...this.value$.value]
 		tags.splice(i, 1)
 		this.value$.next(tags)
 		this.onChange(this.value$.value)
