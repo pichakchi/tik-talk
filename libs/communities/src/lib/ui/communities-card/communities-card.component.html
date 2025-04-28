@@ -23,11 +23,11 @@
           <button
             class="community-btn"
             (click)="onSubscribe(community().id)"
-            [ngClass]="{'active': communityService.isSubscribed}"
+            [ngClass]="{'active': isSubscribed}"
           >
-            {{ communityService.buttonText }}
+            {{ buttonText }}
             <svg
-              icon="subscribe"
+              icon="{{ isSubscribed ? 'unsubscribe' : 'subscribe' }}"
               class="svg16"
             ></svg>
           </button>

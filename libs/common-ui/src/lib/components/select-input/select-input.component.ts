@@ -1,26 +1,46 @@
-import { Component, HostListener, input } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	forwardRef,
+	HostListener,
+	inject,
+	input
+} from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms'
+import {
+	ControlValueAccessor,
+	FormsModule,
+	NG_VALUE_ACCESSOR
+} from '@angular/forms'
+import { of } from 'rxjs'
 
 @Component({
 	selector: 'tt-select-input',
 	standalone: true,
 	imports: [CommonModule, FormsModule],
 	templateUrl: './select-input.component.html',
-	styleUrl: './select-input.component.scss'
-})
-export class SelectInputComponent {
-	placeholder = input<string>()
-	type = input<'text' | 'password'>('text')
-	options: string[] = [
-		'PROGRAMMING',
-		'TECHNOLOGY',
-		'EDUCATION',
-		'SPORT',
-		'OTHER'
+	styleUrl: './select-input.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			multi: true,
+			useExisting: forwardRef(() => SelectInputComponent)
+		}
 	]
-	showOptions: boolean = false
-	selectedOption = ''
+})
+export class SelectInputComponent implements ControlValueAccessor {
+	placeholder = input<string>()
+	options = input<string[]>([])
+
+	cdr = inject(ChangeDetectorRef)
+
+	showOptions = false
+	selectedOption: string | null = null
+
+	onChange: any
+	onTouched: any
 
 	toggleOptions() {
 		this.showOptions = !this.showOptions
@@ -32,8 +52,10 @@ export class SelectInputComponent {
 
 	selectOption(option: string, event: MouseEvent) {
 		event.stopPropagation()
-		this.selectedOption = option
 		this.hideOptions()
+		this.selectedOption = option
+		this.onChange(option)
+		this.cdr.detectChanges()
 	}
 
 	@HostListener('document:click', ['$event'])
@@ -44,5 +66,22 @@ export class SelectInputComponent {
 		if (!clickedInside) {
 			this.hideOptions()
 		}
+	}
+
+	protected readonly of = of
+
+	registerOnChange(fn: any): void {
+		this.onChange = fn
+	}
+
+	registerOnTouched(fn: any): void {
+		this.onTouched = fn
+	}
+
+	setDisabledState(isDisabled: boolean): void {}
+
+	writeValue(value: string | null): void {
+		this.selectedOption = value
+		this.cdr.detectChanges()
 	}
 }

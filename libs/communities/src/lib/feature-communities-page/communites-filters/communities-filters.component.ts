@@ -2,25 +2,19 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	inject,
-	OnDestroy,
-	OnInit
+	OnDestroy
 } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import {
-	FormBuilder,
-	FormControl,
-	FormsModule,
-	ReactiveFormsModule
-} from '@angular/forms'
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { debounceTime, startWith, Subscription } from 'rxjs'
 import { communitiesActions } from '../../data'
 import {
+	SelectInputComponent,
 	StackInputComponent,
 	SvgIconComponent,
 	TtInputComponent
 } from '@tt/common-ui'
-import { SelectInputComponent } from '../../../../../common-ui/src/lib/components/select-input/select-input.component'
 
 @Component({
 	selector: 'app-communities-filters',
@@ -41,6 +35,8 @@ import { SelectInputComponent } from '../../../../../common-ui/src/lib/component
 export class CommunitiesFiltersPageComponent implements OnDestroy {
 	fb = inject(FormBuilder)
 	store = inject(Store)
+
+	themes = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
 
 	searchForm = this.fb.group({
 		name: [''],

@@ -36,6 +36,7 @@ export class AuthService {
 			.post<TokenResponse>(`${this.baseApiUrl}token`, fd)
 			.pipe(tap((val) => this.saveTokens(val)))
 	}
+
 	refreshAuthToken() {
 		return this.http
 			.post<TokenResponse>(`${this.baseApiUrl}refresh`, {
@@ -49,6 +50,7 @@ export class AuthService {
 				})
 			)
 	}
+
 	logout() {
 		this.cookieService.deleteAll()
 		this.token = null
@@ -60,7 +62,7 @@ export class AuthService {
 		this.token = res.access_token
 		this.refreshToken = res.refresh_token
 
-		this.cookieService.set('token', this.token)
-		this.cookieService.set('refresh_token', this.refreshToken)
+		this.cookieService.set('token', this.token, { path: '/' })
+		this.cookieService.set('refresh_token', this.refreshToken, { path: '/' })
 	}
 }

@@ -31,17 +31,12 @@ import { GlobalStoreService } from '@tt/data-access'
 	styleUrl: './post.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
 	post = input<Post>()
 	profile = inject(GlobalStoreService).meProfile
 	comments = signal<PostComment[]>([])
 
 	store = inject(Store)
-
-	ngOnInit() {
-		this.store.dispatch(postActions.fetchPosts({}))
-		this.store.dispatch(postActions.fetchComments({ postId: this.post()!.id }))
-	}
 
 	onCreated(commentText: string) {
 		if (!commentText) return
@@ -56,16 +51,4 @@ export class PostComponent implements OnInit {
 			})
 		)
 	}
-
-	// async ngOnInit() {
-	// 	this.comments.set(this.post()!.comments)
-	// }
-	//
-	// async onCreated() {
-	// 	const comments = await firstValueFrom(
-	// 		this.postService.getCommentsByPostId(this.post()!.id)
-	// 	)
-	// 	//@ts-ignore
-	// 	this.comments.set(comments)
-	// }
 }

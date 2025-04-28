@@ -9,19 +9,15 @@
     placeholder="Введите"
     formControlName="name"
   >
-    <label class="tt-form-label">
-      <span class="tt-form-label__text">Название сообщества</span>
-    </label>
+    Название сообщества
   </tt-input>
 
   <tt-select-input
-    type="text"
     placeholder="Выберите"
     formControlName="themes"
->
-    <label class="tt-form-label">
-      <span class="tt-form-label__text">Тема</span>
-    </label>
+    [options]="themes"
+  >
+    Тема
   </tt-select-input>
 
   <tt-stack-input
@@ -29,8 +25,6 @@
     placeholder="Введите"
     formControlName="tags"
   >
-    <label class="tt-form-label">
-      <span class="tt-form-label__text">Теги</span>
-    </label>
+    Теги
   </tt-stack-input>
 </form>

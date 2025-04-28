@@ -1,17 +1,19 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	DestroyRef,
 	inject,
 	OnInit
 } from '@angular/core'
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common'
 import { RouterLink, RouterLinkActive } from '@angular/router'
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component'
-import { firstValueFrom } from 'rxjs'
+import { firstValueFrom, Subscription, timer } from 'rxjs'
 import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { ChatService, Profile, ProfileService } from '@tt/data-access'
 import { ChatWSMessage } from '../../../../data-access/src/lib/chats/interfaces/chat-ws-message.interface'
 import { isUnreadMessage } from '../../../../data-access/src/lib/chats/interfaces/type-guards'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
 	selector: 'app-sidebar',
@@ -32,11 +34,15 @@ import { isUnreadMessage } from '../../../../data-access/src/lib/chats/interface
 })
 export class SidebarComponent implements OnInit {
 	profileService = inject(ProfileService)
+	chatService = inject(ChatService)
+	destroyRef = inject(DestroyRef)
+
 	subscribers$ = this.profileService.getSubscribersShortList()
+	wsSubscribe!: Subscription
+	meProfile: Profile | null = null
 
 	me = this.profileService.me
-	meProfile: Profile | null = null
-	chatService = inject(ChatService)
+
 	unreadMessage = 0
 
 	menuItems = [
@@ -67,6 +73,27 @@ export class SidebarComponent implements OnInit {
 		}
 	]
 
+	async reconnect() {
+		console.log('Reconnecting...')
+		await firstValueFrom(this.profileService.getMe())
+		await firstValueFrom(timer(2000))
+		this.connectWs()
+	}
+
+	connectWs() {
+		this.wsSubscribe?.unsubscribe()
+		this.wsSubscribe = this.chatService
+			.connectWs()
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe((message) => {
+				//@ts-ignore
+				if (isErrorMessage(message)) {
+					console.log('Неверный токен')
+					this.reconnect()
+				}
+			})
+	}
+
 	handleWSMessageWow = (message: ChatWSMessage) => {
 		if (isUnreadMessage(message)) {
 			this.unreadMessage = message.data.count
@@ -80,7 +107,7 @@ export class SidebarComponent implements OnInit {
 		})
 
 		this.chatService.connectWs().subscribe((message: ChatWSMessage) => {
-			this.handleWSMessageWow(message) // Обработка входящего сообщения
+			this.handleWSMessageWow(message)
 		})
 	}
 }
