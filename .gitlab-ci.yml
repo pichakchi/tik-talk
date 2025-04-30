@@ -1,6 +1,7 @@
 stages:
   - dependencies
   - build
+  - lint
   - deploy
 
 install dependencies:
@@ -19,6 +20,11 @@ install dependencies:
       - node_modules
   only:
     - master
+
+lint:
+  stage: lint
+  script:
+    - linter src/
 
 build_angular:
   stage: build
