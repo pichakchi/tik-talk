@@ -14,7 +14,7 @@ import {
 	TimeAgoPipe
 } from '@tt/common-ui'
 import { Store } from '@ngrx/store'
-import { Post, postActions, PostComment } from '@tt/posts'
+import { Post, PostComment } from '../../data/index';
 import { GlobalStoreService } from '@tt/data-access'
 
 @Component({
