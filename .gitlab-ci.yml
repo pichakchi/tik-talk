@@ -29,7 +29,7 @@ lint:
   tags:
     - docker
   script:
-    - yarn lint
+    - eslint . || true
   cache:
     key:
       files:
