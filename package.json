@@ -12,7 +12,8 @@
 		"start": "nx run tik-talk:serve",
 		"build": "nx build tik-talk",
 		"watch": "nx build --watch --configuration development",
-		"test": "nx test"
+		"test": "nx test",
+    "lint": "eslint ."
 	},
 	"dependencies": {
 		"@angular/animations": "^19.0.0",
@@ -30,6 +31,7 @@
 		"@ngrx/signals": "^19.0.1",
 		"@ngrx/store": "^19.0.1",
 		"@ngxs/store": "^19.0.0",
+		"lint": "^0.8.19",
 		"luxon": "^3.5.0",
 		"ngx-cookie-service": "^19.0.0",
 		"ngx-infinite-scroll": "^19.0.0",
