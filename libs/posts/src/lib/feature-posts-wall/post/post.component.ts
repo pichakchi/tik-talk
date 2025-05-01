@@ -14,8 +14,8 @@ import {
 	TimeAgoPipe
 } from '@tt/common-ui'
 import { Store } from '@ngrx/store'
-import { Post, PostComment } from '../../data/index';
 import { GlobalStoreService } from '@tt/data-access'
+import { Post, postActions, PostComment } from '@tt/posts'
 
 @Component({
 	selector: 'app-post',
