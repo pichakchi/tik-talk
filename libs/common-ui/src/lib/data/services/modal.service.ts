@@ -1,24 +1,43 @@
-import { Injectable, ViewContainerRef } from '@angular/core'
+import {
+	ApplicationRef,
+	inject,
+	Injectable,
+	TemplateRef,
+	ViewContainerRef
+} from '@angular/core'
 import { ModalWindowComponent } from '@tt/common-ui'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ModalService {
-	private container!: ViewContainerRef
+	appRef = inject(ApplicationRef)
 
-	setContainer(container: ViewContainerRef) {
-		this.container = container
+	viewContainerRef!: ViewContainerRef
+
+	setContainer(viewContainerRef: ViewContainerRef) {
+		this.viewContainerRef = viewContainerRef
 	}
 
-	show(component: any) {
-		const containerRef = this.container.createComponent(component)
-		const modalInstance = containerRef.instance as ModalWindowComponent
+	show(viewContainerRef: ViewContainerRef, content: TemplateRef<any>) {
+		const componentRef = viewContainerRef.createComponent(ModalWindowComponent)
+		componentRef.instance.closeWindow = () => this.close(componentRef)
+		componentRef.instance.isVisible = true
+		componentRef.instance.content = content
 
-		modalInstance.isVisible = true
+		const modalElem = componentRef.location.nativeElement
 
-		modalInstance.closeWindow = () => {
-			this.container.remove(this.container.indexOf(containerRef.hostView))
-		}
+		modalElem.addEventListener('click', (event: MouseEvent) => {
+			const target = event.target as HTMLElement
+
+			if (!modalElem.contains(target)) {
+				this.close(componentRef)
+			}
+		})
+	}
+
+	close(componentRef: any) {
+		this.appRef.detachView(componentRef.hostView)
+		componentRef.destroy()
 	}
 }

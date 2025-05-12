@@ -1,8 +1,7 @@
 @if (isVisible) {
-  <div class="modal">
-    <div class="modal-content">
-      <ng-content></ng-content>
-      <button (click)="closeWindow()">Закрыть</button>
+  <div class="modal" (click)="closeWindow()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
     </div>
   </div>
 }

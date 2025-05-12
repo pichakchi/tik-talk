@@ -1,6 +1,7 @@
 import { AddressInputComponent } from './address-input/address-input.component'
 import { AvatarCircleComponent } from './avatar-circle/avatar-circle.component'
 import { InfiniteScrollTriggerComponent } from './infinite-scroll-trigger/infinite-scroll-trigger.component'
+import { ModalWindowComponent } from './modal-window/modal-window.component'
 import { SelectInputComponent } from './select-input/select-input.component'
 import { StackInputComponent } from './stack-input/stack-input.component'
 import { SvgIconComponent } from './svg-icon/svg-icon.component'
@@ -13,5 +14,6 @@ export {
 	TtInputComponent,
 	StackInputComponent,
 	AddressInputComponent,
-	SelectInputComponent
+	SelectInputComponent,
+  ModalWindowComponent
 }

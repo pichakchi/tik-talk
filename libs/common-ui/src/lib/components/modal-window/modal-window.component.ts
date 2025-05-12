@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+	TemplateRef
+} from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 @Component({
@@ -11,8 +18,10 @@ import { CommonModule } from '@angular/common'
 })
 export class ModalWindowComponent {
 	@Input() isVisible: boolean = false
+	@Input() content!: TemplateRef<any>
+	@Output() close = new EventEmitter<void>()
 
 	closeWindow() {
-		this.isVisible = false
+		this.close.emit()
 	}
 }

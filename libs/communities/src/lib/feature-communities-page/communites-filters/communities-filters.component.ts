@@ -2,7 +2,10 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	inject,
-	OnDestroy
+	OnDestroy,
+	TemplateRef,
+	ViewChild,
+	ViewContainerRef
 } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -10,6 +13,7 @@ import { Store } from '@ngrx/store'
 import { debounceTime, startWith, Subscription } from 'rxjs'
 import { communitiesActions } from '../../data'
 import {
+	ModalService,
 	SelectInputComponent,
 	StackInputComponent,
 	SvgIconComponent,
@@ -26,7 +30,7 @@ import {
 		StackInputComponent,
 		SvgIconComponent,
 		TtInputComponent,
-		SelectInputComponent
+		SelectInputComponent,
 	],
 	templateUrl: './communities-filters.component.html',
 	styleUrl: './communities-filters.component.scss',
@@ -35,6 +39,9 @@ import {
 export class CommunitiesFiltersPageComponent implements OnDestroy {
 	fb = inject(FormBuilder)
 	store = inject(Store)
+	modalService = inject(ModalService)
+
+	isModalVisible = false
 
 	themes = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
 
@@ -73,5 +80,14 @@ export class CommunitiesFiltersPageComponent implements OnDestroy {
 		this.searchForm.valueChanges.subscribe((value) => {
 			this.autoSave(value)
 		})
+	}
+
+	@ViewChild('modalContainer', { read: ViewContainerRef })
+	modalContainer!: ViewContainerRef
+	@ViewChild('contentTemplate') contentTemplate!: TemplateRef<any>
+
+	openCreateCommunityModal() {
+		this.isModalVisible = true
+		this.modalService.show(this.modalContainer, this.contentTemplate)
 	}
 }
