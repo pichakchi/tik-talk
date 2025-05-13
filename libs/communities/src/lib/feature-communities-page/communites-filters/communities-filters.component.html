@@ -1,24 +1,30 @@
+<div class="community-header">
+  <h2>Сообщества</h2>
+  <button class="community-btn">Создать сообщество<svg icon="communities" class="svg16"></svg></button>
+</div>
+
 <form class="communities-search-form" [formGroup]="searchForm">
-  <label class="tt-form-label">
-    <span class="tt-form-label__text">Название сообщества</span>
-    <input type="text" class="tt-form-input" formControlName="name" placeholder="Выберите">
-  </label>
+  <tt-input
+    type="text"
+    placeholder="Введите"
+    formControlName="name"
+  >
+    Название сообщества
+  </tt-input>
 
-  <label class="tt-form-label">
-    <span class="tt-form-label__text">Тема</span>
-<!--    <input type="text" class="tt-form-input" formControlName="themes" placeholder="Выберите">-->
-    <select class="tt-form-input" formControlName="themes">
-      <option [value]="Themes.PROGRAMMING">PROGRAMMING</option>
-      <option [value]="Themes.TECHNOLOGY">TECHNOLOGY</option>
-      <option [value]="Themes.EDUCATION">EDUCATION</option>
-      <option [value]="Themes.SPORT">SPORT</option>
-      <option [value]="Themes.OTHER">OTHER</option>
-    </select>
-  </label>
+  <tt-select-input
+    placeholder="Выберите"
+    formControlName="themes"
+    [options]="themes"
+  >
+    Тема
+  </tt-select-input>
 
-  <label class="tt-form-label">
-    <span class="tt-form-label__text">Теги</span>
-<!--    <input type="text" class="tt-form-input" formControlName="tags" placeholder="Выберите">-->
-    <tt-stack-input formControlName="stack" class="community-stack"></tt-stack-input>
-  </label>
+  <tt-stack-input
+    type="text"
+    placeholder="Введите"
+    formControlName="tags"
+  >
+    Теги
+  </tt-stack-input>
 </form>

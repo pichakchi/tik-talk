@@ -8,6 +8,7 @@
         [routerLink]="[menuItem.link]"
         routerLinkActive="active">
         <svg [icon]="menuItem.icon"></svg>
+        {{menuItem.label}}
         <span *ngIf="menuItem.label === 'Чаты'" class="unread-all-message-amount medium-text">{{ unreadMessage }}</span>
       </a>
     </li>

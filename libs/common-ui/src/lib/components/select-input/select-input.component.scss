@@ -1,0 +1,45 @@
+.select-ghost-input {
+	padding-top: 7px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 21px;
+	font-family: 'JetBrains Mono', sans-serif;
+	color: var(--light-color);
+	border: none;
+	background: none;
+	outline: none;
+}
+
+.options {
+	margin-top: 15px;
+	padding: 16px 12px;
+	background-color: var(--dark-color);
+	border: 1px solid var(--light-color);
+	border-radius: 2px;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+	width: auto;
+	min-width: 356px;
+	max-width: none;
+	position: fixed;
+	z-index: 1000;
+	list-style: none;
+}
+
+.option {
+	cursor: pointer;
+	padding: 0 8px;
+	border-radius: 2px;
+	border: 1px solid var(--light-color);
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 24px;
+	height: 24px;
+}
+
+.option:hover {
+	background-color: var(--dark-active-color);
+	color: var(--primary-color);
+	border: 2px solid var(--primary-color);
+}

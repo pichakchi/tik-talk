@@ -7,11 +7,11 @@ import {
 	Renderer2
 } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { CommunitiesFiltersPageComponent } from '../communites-filters/communities-filters.component'
 import { Store } from '@ngrx/store'
 import { communitiesActions, selectFilteredCommunities } from '../../data'
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs'
 import { CommunitiesCardComponent } from '../../ui'
+import { CommunitiesFiltersPageComponent } from '@tt/communities'
 
 @Component({
 	selector: 'tt-communities',

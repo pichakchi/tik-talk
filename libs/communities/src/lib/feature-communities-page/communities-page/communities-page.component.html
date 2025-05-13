@@ -1,9 +1,9 @@
 <app-communities-filters> </app-communities-filters>
 
 <div class="communities-card__wrapper">
-  @for (communities of community(); track communities.id;) {
+  @for (community of community(); track community.id;) {
     <app-communities-card
-      [communities]="communities"
+      [community]="community"
     ></app-communities-card>
   }
 </div>
