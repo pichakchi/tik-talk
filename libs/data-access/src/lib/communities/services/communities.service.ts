@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Communities, Pageble } from '@tt/data-access'
+import { Community, Pageble } from '@tt/data-access'
 
 @Injectable({
 	providedIn: 'root'
@@ -9,15 +9,25 @@ export class CommunitiesService {
 	http = inject(HttpClient)
 
 	baseApiUrl = 'https://icherniakov.ru/yt-course/'
-	me = signal<Communities | null>(null)
-
-	getCommunities(id: string) {
-		return this.http.get<Communities>(`${this.baseApiUrl}community/${id}`)
-	}
+	me = signal<Community | null>(null)
 
 	filterCommunities(params: Record<string, any>) {
-		return this.http.get<Pageble<Communities>>(`${this.baseApiUrl}community/`, {
+		return this.http.get<Pageble<Community>>(`${this.baseApiUrl}community/`, {
 			params
 		})
+	}
+
+	joinCommunity(community_id: number) {
+		return this.http.post(
+			`${this.baseApiUrl}community/${community_id}/join`,
+			{}
+		)
+	}
+
+	leaveCommunity(community_id: number) {
+		return this.http.post(
+			`${this.baseApiUrl}community/${community_id}/join`,
+			{}
+		)
 	}
 }

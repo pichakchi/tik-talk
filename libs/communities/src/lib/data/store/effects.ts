@@ -17,7 +17,7 @@ export class CommunitiesEffects {
 
 	filterCommunities = createEffect(() => {
 		return this.actions$.pipe(
-			ofType(communitiesActions.filterEvents, communitiesActions.setPage),
+			ofType(communitiesActions.filterCommunities, communitiesActions.setPage),
 			withLatestFrom(
 				this.store.select(selectCommunitiesFilters),
 				this.store.select(selectCommunitiesPageable)

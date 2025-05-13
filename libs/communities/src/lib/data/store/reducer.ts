@@ -1,9 +1,9 @@
-import { Communities } from '@tt/data-access'
+import { Community } from '@tt/data-access'
 import { createFeature, createReducer, on } from '@ngrx/store'
 import { communitiesActions } from './actions'
 
 export interface CommunitiesState {
-	communities: Communities[]
+	communities: Community[]
 	communitiesFilters: Record<string, any>
 	page: number
 	size: number
@@ -26,7 +26,7 @@ export const communitiesFeature = createFeature({
 				communities: state.communities.concat(payload.communities)
 			}
 		}),
-		on(communitiesActions.filterEvents, (state, payload) => {
+		on(communitiesActions.filterCommunities, (state, payload) => {
 			return {
 				...state,
 				communities: [],
