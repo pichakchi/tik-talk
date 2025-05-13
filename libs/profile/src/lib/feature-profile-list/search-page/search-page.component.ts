@@ -10,7 +10,7 @@ import { debounceTime, fromEvent, pipe, Subject, takeUntil } from 'rxjs'
 import { ProfileCardComponent } from '../../ui'
 import { Store } from '@ngrx/store'
 import { profileActions, selectFilteredProfiles } from '../../data/store'
-import { ProfileFiltersComponent } from '../index';
+import { ProfileFiltersComponent } from '@tt/profile'
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll'
 import { InfiniteScrollTriggerComponent } from '@tt/common-ui'
 

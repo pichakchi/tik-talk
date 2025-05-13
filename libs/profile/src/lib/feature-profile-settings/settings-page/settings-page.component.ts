@@ -10,7 +10,6 @@ import { firstValueFrom } from 'rxjs'
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui'
 import { StackInputComponent } from 'libs/common-ui/src/lib/components/stack-input/stack-input.component'
 import { ProfileService } from 'libs/data-access/src/lib/profile/services/profile.service'
-import { AddressInputComponent } from '@tt/common-ui'
 
 @Component({
 	selector: 'app-settings-page',
@@ -19,8 +18,7 @@ import { AddressInputComponent } from '@tt/common-ui'
 		ProfileHeaderComponent,
 		ReactiveFormsModule,
 		AvatarUploadComponent,
-		StackInputComponent,
-		AddressInputComponent
+		StackInputComponent
 	],
 	templateUrl: './settings-page.component.html',
 	styleUrl: './settings-page.component.scss',

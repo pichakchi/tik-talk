@@ -8,7 +8,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { debounceTime, startWith, Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { ProfileService } from '@tt/data-access'
-import { profileActions } from '../../data/store/actions'
+import { profileActions } from '../../data'
 
 @Component({
 	selector: 'app-profile-filters',
@@ -50,7 +50,7 @@ export class ProfileFiltersComponent implements OnDestroy {
 	ngOnInit() {
 		const savedData = localStorage.getItem('formData')
 		if (savedData) {
-			this.searchForm.setValue(JSON.parse(savedData))
+			this.searchForm.patchValue(JSON.parse(savedData))
 		}
 
 		this.searchForm.valueChanges.subscribe((value) => {

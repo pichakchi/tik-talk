@@ -44,7 +44,7 @@
 			"style": "scss",
 			"skipTests": true,
 			"standalone": true,
-      "changeDetection": "OnPush"
+			"changeDetection": "OnPush"
 		}
 	}
 }

@@ -33,7 +33,7 @@ import { Post, postActions, PostComment } from '@tt/posts'
 })
 export class PostComponent implements OnInit {
 	post = input<Post>()
-	profile = inject(GlobalStoreService).me
+	profile = inject(GlobalStoreService).meProfile
 	comments = signal<PostComment[]>([])
 
 	store = inject(Store)

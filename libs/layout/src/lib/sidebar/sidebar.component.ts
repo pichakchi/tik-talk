@@ -54,6 +54,16 @@ export class SidebarComponent implements OnInit {
 			label: 'Поиск',
 			icon: 'search',
 			link: 'search'
+		},
+		{
+			label: 'Сообщества',
+			icon: 'communities',
+			link: 'communities'
+		},
+		{
+			label: 'Консультация',
+			icon: 'experimental',
+			link: 'experimental'
 		}
 	]
 

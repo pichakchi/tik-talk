@@ -13,6 +13,11 @@ import { provideEffects } from '@ngrx/effects'
 import { PostEffects, postFeature } from '@tt/posts'
 import { profileFeature } from 'libs/profile/src/lib/data/store/reducer'
 import { ProfileEffects } from 'libs/profile/src/lib/data/store/effects'
+import {
+	CommunitiesEffects,
+	communitiesFeature,
+	CommunitiesPageComponent
+} from '../../../../libs/communities/src'
 
 export const routes: Routes = [
 	{
@@ -35,6 +40,14 @@ export const routes: Routes = [
 			},
 			{ path: 'settings', component: SettingsPageComponent },
 			{ path: 'experimental', component: ExperimentalDirective },
+			{
+				path: 'communities',
+				component: CommunitiesPageComponent,
+				providers: [
+					provideState(communitiesFeature),
+					provideEffects(CommunitiesEffects)
+				]
+			},
 			{
 				path: 'chats',
 				loadChildren: () => chatsRoutes

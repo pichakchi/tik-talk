@@ -29,7 +29,7 @@ export class PostInputComponent {
 
 	isCommentInput = input(false)
 	postId = input<number>(0)
-	profile = inject(GlobalStoreService).me
+	profile = inject(GlobalStoreService).meProfile
 
 	@Output() created = new EventEmitter()
 

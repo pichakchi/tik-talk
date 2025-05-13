@@ -1,0 +1,9 @@
+<app-communities-filters> </app-communities-filters>
+
+<div class="communities-card__wrapper">
+  @for (communities of community(); track communities.id;) {
+    <app-communities-card
+      [communities]="communities"
+    ></app-communities-card>
+  }
+</div>
