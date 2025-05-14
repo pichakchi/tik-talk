@@ -13,7 +13,7 @@
 		"build": "nx build tik-talk",
 		"watch": "nx build --watch --configuration development",
 		"test": "nx test",
-    "lint": "eslint . || true"
+		"lint": "eslint . || true"
 	},
 	"dependencies": {
 		"@angular/animations": "^19.0.0",
@@ -37,6 +37,7 @@
 		"ngx-infinite-scroll": "^19.0.0",
 		"rxjs": "~7.8.0",
 		"tslib": "^2.3.0",
+		"yarn": "^1.22.22",
 		"zone.js": "~0.15.0"
 	},
 	"devDependencies": {
