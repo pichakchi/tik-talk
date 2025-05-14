@@ -19,7 +19,6 @@ import { InfiniteScrollTriggerComponent } from '@tt/common-ui'
 	imports: [
 		ProfileCardComponent,
 		ProfileFiltersComponent,
-		InfiniteScrollDirective,
 		InfiniteScrollTriggerComponent
 	],
 	templateUrl: './search-page.component.html',
