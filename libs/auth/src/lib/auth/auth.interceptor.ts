@@ -14,7 +14,7 @@ import {
 } from 'rxjs'
 import { AuthService } from '@tt/data-access'
 
-let isRefreshing$ = new BehaviorSubject<boolean>(false)
+const isRefreshing$ = new BehaviorSubject<boolean>(false)
 
 export const authTokenInerceptor: HttpInterceptorFn = (req, next) => {
 	if (req.url.includes('dadata.ru')) return next(req)

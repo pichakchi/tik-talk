@@ -6,12 +6,13 @@ import {
 	inject,
 	Renderer2
 } from '@angular/core'
-import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs'
+import { debounceTime, fromEvent, pipe, Subject, takeUntil } from 'rxjs'
 import { ProfileCardComponent } from '../../ui'
 import { Store } from '@ngrx/store'
+import { profileActions, selectFilteredProfiles } from '../../data/store'
 import { ProfileFiltersComponent } from '@tt/profile'
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll'
 import { InfiniteScrollTriggerComponent } from '@tt/common-ui'
-import { profileActions, selectFilteredProfiles } from '../../data'
 
 @Component({
 	selector: 'app-search-page',
@@ -35,12 +36,12 @@ export class SearchPageComponent {
 
 	constructor() {}
 
-	timeToFetchProfile() {
+	timeToFetch() {
 		this.store.dispatch(profileActions.setPage({}))
 	}
 
-	onScrollProfile() {
-		this.timeToFetchProfile()
+	onScroll() {
+		this.timeToFetch()
 	}
 
 	// onIntersection(entries: IntersectionObserverEntry[]) {

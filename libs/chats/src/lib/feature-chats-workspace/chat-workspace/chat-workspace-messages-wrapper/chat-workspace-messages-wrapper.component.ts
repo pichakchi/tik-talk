@@ -21,7 +21,7 @@ import { ActivatedRoute } from '@angular/router'
 import { NgForOf } from '@angular/common'
 
 import { PostService } from '@tt/posts'
-import { MessageInputComponent } from '@tt/chats'
+import { MessageInputComponent } from '../../../ui/index';
 import { Chat, ChatService } from 'libs/data-access/src/lib/chats'
 
 @Component({

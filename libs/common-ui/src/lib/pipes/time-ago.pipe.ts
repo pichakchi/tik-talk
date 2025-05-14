@@ -7,8 +7,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 export class TimeAgoPipe implements PipeTransform {
 	transform(
 		value: string,
-		locale: string = 'ru',
-		timeZone: string = 'Europe/Moscow'
+		locale = 'ru',
+		timeZone = 'Europe/Moscow'
 	): string {
 		if (!value) {
 			return 'Нет данных'
