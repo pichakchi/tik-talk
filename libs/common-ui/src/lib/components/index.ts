@@ -15,5 +15,5 @@ export {
 	StackInputComponent,
 	AddressInputComponent,
 	SelectInputComponent,
-  ModalWindowComponent
+	ModalWindowComponent
 }
