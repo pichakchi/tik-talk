@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import { ModalWindowComponent } from '@tt/common-ui'
+import { ModalWindowComponent } from '../../../../../common-ui/src/lib/components/modal-window/modal-window.component'
 
 @Component({
-	selector: 'community-modal',
+	selector: 'tt-community-modal',
 	standalone: true,
 	templateUrl: './community-modal.component.html',
 	imports: [ModalWindowComponent],

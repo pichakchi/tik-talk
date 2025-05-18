@@ -3,13 +3,14 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	inject,
+	OnInit,
 	ViewChild,
 	ViewContainerRef
 } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { SidebarComponent } from '../sidebar/sidebar.component'
-import { ModalService } from '@tt/common-ui'
 import { ModalHostComponent } from '../modal-host/modal-host.component'
+import { ModalService } from '@tt/common-ui'
 
 @Component({
 	selector: 'app-layout',
