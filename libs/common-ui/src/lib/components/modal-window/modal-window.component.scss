@@ -8,10 +8,21 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: opacity 1s ease-in-out;
 }
 
 .modal-content {
-	background-color: white;
-	padding: 20px;
+	background-color: var(--dark-color);
+	padding: 32px;
 	border-radius: 5px;
+	border: 1px solid var(--light-color);
+}
+
+.modal-cross {
+	cursor: pointer;
+	margin-left: 90%;
+}
+
+.modal-text {
+	padding-top: 10px;
 }

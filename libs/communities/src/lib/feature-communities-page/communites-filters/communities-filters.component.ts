@@ -10,11 +10,13 @@ import { Store } from '@ngrx/store'
 import { debounceTime, startWith, Subscription } from 'rxjs'
 import { communitiesActions } from '../../data'
 import {
+	ModalService,
 	SelectInputComponent,
 	StackInputComponent,
 	SvgIconComponent,
 	TtInputComponent
 } from '@tt/common-ui'
+import { CommunityModalComponent } from '@tt/communities'
 
 @Component({
 	selector: 'app-communities-filters',
@@ -35,6 +37,7 @@ import {
 export class CommunitiesFiltersPageComponent implements OnDestroy {
 	fb = inject(FormBuilder)
 	store = inject(Store)
+	modalService = inject(ModalService)
 
 	themes = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
 
@@ -73,5 +76,9 @@ export class CommunitiesFiltersPageComponent implements OnDestroy {
 		this.searchForm.valueChanges.subscribe((value) => {
 			this.autoSave(value)
 		})
+	}
+
+	openCreateCommunityModal() {
+		this.modalService.show(CommunityModalComponent)
 	}
 }

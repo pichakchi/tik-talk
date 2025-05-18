@@ -1,8 +1,8 @@
-@if (isVisible) {
-  <div class="modal">
+<div class="modal">
     <div class="modal-content">
-      <ng-content></ng-content>
-      <button (click)="closeWindow()">Закрыть</button>
+      <svg class="svg16 modal-cross" icon="close" (click)="modalService.close()"></svg>
+      <div class="modal-text">
+        <ng-content></ng-content>
+      </div>
     </div>
-  </div>
-}
+</div>

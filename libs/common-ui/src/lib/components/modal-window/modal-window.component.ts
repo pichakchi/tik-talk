@@ -1,18 +1,30 @@
-import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	HostListener,
+	inject
+} from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { SvgIconComponent } from '../svg-icon/svg-icon.component'
+import { ModalService } from '@tt/common-ui'
 
 @Component({
-	selector: 'tt-modal-window',
+	selector: 'tt-base-modal',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, SvgIconComponent],
 	templateUrl: './modal-window.component.html',
 	styleUrl: './modal-window.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalWindowComponent {
-	@Input() isVisible: boolean = false
+	modalService = inject(ModalService)
 
-	closeWindow() {
-		this.isVisible = false
+	closeModal() {
+		this.modalService.close()
+	}
+
+	@HostListener('document:keydown.escape')
+	onEsc(): void {
+		this.closeModal()
 	}
 }
