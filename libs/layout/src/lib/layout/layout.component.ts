@@ -3,7 +3,6 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	inject,
-	OnInit,
 	ViewChild,
 	ViewContainerRef
 } from '@angular/core'

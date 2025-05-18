@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { ModalWindowComponent } from '../../../../../common-ui/src/lib/components/modal-window/modal-window.component'
+import { ModalWindowComponent } from '@tt/common-ui'
 
 @Component({
 	selector: 'tt-community-modal',
