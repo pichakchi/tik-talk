@@ -2,10 +2,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	inject,
-	OnDestroy,
-	TemplateRef,
-	ViewChild,
-	ViewContainerRef
+	OnDestroy
 } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -19,6 +16,7 @@ import {
 	SvgIconComponent,
 	TtInputComponent
 } from '@tt/common-ui'
+import { CommunityModalComponent } from '@tt/communities'
 
 @Component({
 	selector: 'app-communities-filters',
@@ -30,7 +28,7 @@ import {
 		StackInputComponent,
 		SvgIconComponent,
 		TtInputComponent,
-		SelectInputComponent,
+		SelectInputComponent
 	],
 	templateUrl: './communities-filters.component.html',
 	styleUrl: './communities-filters.component.scss',
@@ -40,8 +38,6 @@ export class CommunitiesFiltersPageComponent implements OnDestroy {
 	fb = inject(FormBuilder)
 	store = inject(Store)
 	modalService = inject(ModalService)
-
-	isModalVisible = false
 
 	themes = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
 
@@ -82,12 +78,7 @@ export class CommunitiesFiltersPageComponent implements OnDestroy {
 		})
 	}
 
-	@ViewChild('modalContainer', { read: ViewContainerRef })
-	modalContainer!: ViewContainerRef
-	@ViewChild('contentTemplate') contentTemplate!: TemplateRef<any>
-
 	openCreateCommunityModal() {
-		this.isModalVisible = true
-		this.modalService.show(this.modalContainer, this.contentTemplate)
+		this.modalService.show(CommunityModalComponent)
 	}
 }

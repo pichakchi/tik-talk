@@ -13,7 +13,16 @@
 
 .modal-content {
 	background-color: var(--dark-color);
-	padding: 60px 32px;
+	padding: 32px;
 	border-radius: 5px;
 	border: 1px solid var(--light-color);
+}
+
+.modal-cross {
+	cursor: pointer;
+	margin-left: 90%;
+}
+
+.modal-text {
+	padding-top: 10px;
 }
