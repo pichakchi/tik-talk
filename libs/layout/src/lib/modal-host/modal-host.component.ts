@@ -1,4 +1,5 @@
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	ViewChild,
@@ -16,11 +17,13 @@ import { ModalService } from '@tt/common-ui'
 	styleUrl: './modal-host.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalHostComponent {
-	@ViewChild('modalContainer', { read: ViewContainerRef, static: true })
+export class ModalHostComponent implements AfterViewInit {
+	@ViewChild('modalContainer', { read: ViewContainerRef })
 	modalContainer!: ViewContainerRef
 
-	constructor(public modalService: ModalService) {
+	constructor(private modalService: ModalService) {}
+
+	ngAfterViewInit() {
 		this.modalService.setContainer(this.modalContainer)
 	}
 }
