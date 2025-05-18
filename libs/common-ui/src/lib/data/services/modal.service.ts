@@ -1,24 +1,27 @@
-import { Injectable, ViewContainerRef } from '@angular/core'
-import { ModalWindowComponent } from '@tt/common-ui'
+import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ModalService {
-	private container!: ViewContainerRef
+	viewContainerRef!: ViewContainerRef
+	componentRefs: ComponentRef<any>[] = []
 
-	setContainer(container: ViewContainerRef) {
-		this.container = container
+	setContainer(viewContainerRef: ViewContainerRef) {
+		this.viewContainerRef = viewContainerRef
 	}
 
-	show(component: any) {
-		const containerRef = this.container.createComponent(component)
-		const modalInstance = containerRef.instance as ModalWindowComponent
+	show(CommunityModalComponent: any) {
+		const componentRef = this.viewContainerRef.createComponent(
+			CommunityModalComponent
+		)
+		this.componentRefs.push(componentRef)
+	}
 
-		modalInstance.isVisible = true
-
-		modalInstance.closeWindow = () => {
-			this.container.remove(this.container.indexOf(containerRef.hostView))
+	close(): void {
+		const componentRef = this.componentRefs.pop()
+		if (componentRef) {
+			componentRef.destroy()
 		}
 	}
 }

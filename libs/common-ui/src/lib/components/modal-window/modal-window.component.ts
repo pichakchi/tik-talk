@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	HostListener,
+	inject
+} from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { ModalService } from '@tt/common-ui'
 
 @Component({
-	selector: 'tt-modal-window',
+	selector: 'tt-base-modal',
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './modal-window.component.html',
@@ -10,9 +16,14 @@ import { CommonModule } from '@angular/common'
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalWindowComponent {
-	@Input() isVisible: boolean = false
+	modalService = inject(ModalService)
 
-	closeWindow() {
-		this.isVisible = false
+	closeModal() {
+		this.modalService.close()
+	}
+
+	@HostListener('document:keydown.escape')
+	onEsc(): void {
+		this.closeModal()
 	}
 }
