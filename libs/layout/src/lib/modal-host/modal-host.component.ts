@@ -3,7 +3,6 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ViewChild,
-	viewChild,
 	ViewContainerRef
 } from '@angular/core'
 import { CommonModule } from '@angular/common'
